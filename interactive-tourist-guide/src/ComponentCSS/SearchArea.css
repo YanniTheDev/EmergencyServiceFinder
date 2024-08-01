@@ -1,0 +1,31 @@
+.search-area {
+    background-color: blanchedalmond;
+
+    width: 40vw;
+    height: 100vh;
+}
+
+.search-area h1 {
+    font-size: 2.5vw;
+    font-family:'Courier New', Courier, monospace;
+
+    margin-bottom: 4vh
+}
+
+.search-area input {
+    padding-left: 5px;
+    padding-right: 5px;
+
+    border: none;
+    border-radius: 10px;
+
+    height: 5vh;
+    width: 50%;
+
+    font-size: 3vh;
+}
+
+.search-area input:focus {
+    border: none;
+    outline: none;
+}

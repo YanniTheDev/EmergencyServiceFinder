@@ -1,9 +1,16 @@
 .flex-dir-col {
     flex-direction: column;
 }
-
+.flex-dir-row {
+    flex-direction: row;
+}
 .flex-c-c {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.flex-s-s {
+    display: flex;
+    justify-content: start;
+    align-items: start;
 }

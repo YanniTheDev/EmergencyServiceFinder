@@ -5,14 +5,35 @@
     height: 100vh;
 }
 
-.search-area h1 {
+.search-area button {
+    padding: 10px 10px 10px 10px;
+
+    background-color: white;
+
+    width: 30%;
+    height: 8%;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 100%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.address-input, .distance-input {
+    width: 100%;
+
+    margin-bottom: 8vh;
+}
+
+.address-input h1, .distance-input h1 {
     font-size: 2.5vw;
     font-family:'Courier New', Courier, monospace;
 
     margin-bottom: 4vh
 }
 
-.search-area input {
+.address-input input, .distance-input input {
     padding-left: 5px;
     padding-right: 5px;
 
@@ -23,9 +44,10 @@
     width: 50%;
 
     font-size: 3vh;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.search-area input:focus {
+.address-input input:focus, .distance-input input {
     border: none;
     outline: none;
 }

@@ -15,11 +15,14 @@ export const SearchArea = () => {
 
     const [addressInfo, setAddressInfo] = useState(0);
 
+    const apiKey = import.meta.env.VITE_HERE_API_KEY;
+
     const geoCodeAddress = () => {
-        let url = `https://geocode.search.hereapi.com/v1/geocode?q=${address}&apiKey=KQfiAv_6Iy90vvbhCCMvOt_rK3kmtC_YWP9Kt-laftg`
+        let url = `https://geocode.search.hereapi.com/v1/geocode?q=${address}&apiKey=${apiKey}`
 
         Axios.get(url).then((response) => {
 
+            //Weird React thing going on. Why make new variable am i right???
             const apiResponse = response;
             setAddressInfo(apiResponse);
 

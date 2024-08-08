@@ -10,13 +10,13 @@
 
     background-color: white;
 
-    width: 30%;
-    height: 8%;
+    width: 15vw;
+    height: 10vh;
 
     border: none;
     border-radius: 10px;
 
-    font-size: 125%;
+    font-size: 1.6vw;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
     transition: box-shadow 0.2s ease-in-out;
@@ -77,5 +77,5 @@
 
 .address-container input::placeholder, .distance-container input::placeholder {
     font-style: italic;
-    color: rgb(226, 226, 226);
+    color: rgb(143, 143, 143);
 }

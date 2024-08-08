@@ -8,9 +8,12 @@ function App() {
 
   return (
     <>
-      <div className="flex-s-s flex-dir-row">
+      <div className="app flex-s-s flex-dir-row">
+
+        {/* Components */}
         <SearchArea />
         <Map />
+
       </div>
     </>
   );

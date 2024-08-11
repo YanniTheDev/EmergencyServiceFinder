@@ -29,8 +29,8 @@ export const SearchArea = () => {
             let apiResponse = response;
             let apiResponseCoords = response.data.items[0].position;
 
-            console.log(apiResponse);
-            console.log(apiResponseCoords);
+            //Testing stuff
+            //console.log(apiResponse);
 
             findPetrolStations(apiResponseCoords);
 

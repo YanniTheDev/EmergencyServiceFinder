@@ -25,8 +25,6 @@ export const SearchArea = () => {
         //API REQUEST!
         Axios.get(url).then((response) => {
 
-            //Weird React thing going on. Why make new variable am i right???
-            let apiResponse = response;
             let apiResponseCoords = response.data.items[0].position;
 
             //Testing stuff
@@ -40,20 +38,20 @@ export const SearchArea = () => {
     }
 
     const findPetrolStations = (coords) => {
-        let url = `https://discover.search.hereapi.com/v1/discover?at=${coords.lat},${coords.lng}&q=petrol+station&apiKey=${apiKey}`
+        let url = `https://discover.search.hereapi.com/v1/discover?at=${coords.lat},${coords.lng}&q=restaurants&apiKey=${apiKey}`
     
         //API REQUEST!!
         Axios.get(url).then((response) => {
 
             //Weird React thing going on. Why make new variable am i right???
-            let petrolStations = response.data.items;
+            let restaurants = response.data.items;
 
-            let validPetrolStations = petrolStations.filter((element) => {
+            let validRestaurants = restaurants.filter((element) => {
                 return element.distance <= maxTravelDistance;
             })
 
-            console.log(petrolStations);
-            console.log(validPetrolStations);
+            console.log(restaurants);
+            console.log(validRestaurants);
 
         }).catch((error) => {
             console.error(error);

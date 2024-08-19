@@ -47,7 +47,8 @@ export const SearchArea = () => {
             let restaurants = response.data.items;
 
             let validRestaurants = restaurants.filter((element) => {
-                return element.distance <= maxTravelDistance;
+                //converting the distance from metres to kilometres
+                return (element.distance / 1000) <= maxTravelDistance;
             })
 
             console.log(restaurants);
@@ -67,7 +68,7 @@ export const SearchArea = () => {
             </div>
 
             <div className="distance-container flex-dir-col flex-c-c">
-                <h1>Maximum Travel Distance</h1>
+                <h1>Maximum Travel Distance (KM)</h1>
 
                 <input type="number" placeholder="e.g. 35" onChange={getMaxTravelDistance}/>
             </div>

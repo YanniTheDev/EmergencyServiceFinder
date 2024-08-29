@@ -13,7 +13,8 @@ function App() {
       <div className="app flex-s-s flex-dir-row">
 
         {/* Components */}
-        <SearchArea apiKey={apiKey}/>
+        {/* Using props! */}
+        <SearchArea apiKey={apiKey}/> 
         <Map apiKey={apiKey} />
 
       </div>

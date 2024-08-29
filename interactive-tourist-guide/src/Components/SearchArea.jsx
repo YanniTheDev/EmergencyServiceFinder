@@ -5,7 +5,7 @@ import Axios from "axios";
 import "../ComponentCSS/SearchArea.css";
 import "../Reusables.css"
 
-export const SearchArea = () => {
+export const SearchArea = (props) => {
 
     const [address, setAddress] = useState("");
     const getAddress = (event) => {
@@ -17,10 +17,9 @@ export const SearchArea = () => {
         setMaxTravelDistance(event.target.value);
     }
 
-    const apiKey = import.meta.env.VITE_HERE_API_KEY;
 
     const geoCodeAddress = () => {
-        let url = `https://geocode.search.hereapi.com/v1/geocode?q=${address}&apiKey=${apiKey}`
+        let url = `https://geocode.search.hereapi.com/v1/geocode?q=${address}&apiKey=${props.apiKey}`
 
         //API REQUEST!
         Axios.get(url).then((response) => {
@@ -38,7 +37,7 @@ export const SearchArea = () => {
     }
 
     const findPetrolStations = (coords) => {
-        let url = `https://discover.search.hereapi.com/v1/discover?at=${coords.lat},${coords.lng}&q=restaurants&apiKey=${apiKey}`
+        let url = `https://discover.search.hereapi.com/v1/discover?at=${coords.lat},${coords.lng}&q=restaurants&apiKey=${props.apiKey}`
     
         //API REQUEST!!
         Axios.get(url).then((response) => {

@@ -1,53 +1,53 @@
 import "../ComponentCSS/MapArea.css";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import H from "@here/maps-api-for-javascript";
 
-export const Map = (props) => {
+export const Map = ({ apiKey }) => {
 
-    // // Initiate and authenticate your connection to the HERE platform:
-    // const platform = new H.service.Platform({
-    //     "apiKey": props.apiKey
-    // })
+    const mapRef = useRef(null);
+    const map = useRef(null);
+    const platform = useRef(null);
 
-    // // Initialize the engine type:
-    // const engineType = H.Map.EngineType["Harp"];
+    useEffect(() => {
+        // Check if the map object has already been created
+        if (!map.current) {
 
-    // // Obtain the default map types from the platform object:
-    // const defaultLayers = platform.createDefaultLayers({
-    //     engineType: engineType
-    // });
+            // Create a platform object with the API key and useCIT option
+            platform.current = new H.service.Platform({
+                apiKey
+            });
 
-    // const mapRef = useRef();
+            // Obtain the default map types from the platform object:
+            const defaultLayers = platform.current.createDefaultLayers({
+                pois: true
+            });
 
-    // // Instantiate (and display) a map:
-    // const map = new H.Map(
-    //     mapRef.current,
-    //     defaultLayers.hybrid.day.raster,
-    //     {
-    //         engineType: engineType,
-    //         zoom: 14,
-    //         pixelRatio: 2,
-    //         center: {
-    //             lat: 45.5048,
-    //             lng: -73.5870
-    //         }
-    //     }
-    // )
+            // Create a new map instance with the Tile layer, center and zoom level
+            // Instantiate (and display) a map:
+            const newMap = new H.Map(
+                mapRef.current,
+                defaultLayers.vector.normal.map, {
+                    zoom: 14,
+                    center: {
+                        lat: 64.144,
+                        lng: -21.94,
+                    },
+                }
+            );
 
-    // map.addLayer(defaultLayers.hybrid.day.vector);
+            // Add panning and zooming behavior to the map
+            const behavior = new H.mapevents.Behavior(
+                new H.mapevents.MapEvents(newMap)
+            );
 
-    // // MapEvents enables the event system.
-    // // The behavior variable implements default interactions for pan/zoom (also on mobile touch environments).
-    // const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
-
-    // // Enable dynamic resizing of the map, based on the current size of the enclosing cntainer
-    // window.addEventListener('resize', () => map.getViewPort().resize());
-
-    // // Create the default UI:
-    // const ui = H.ui.UI.createDefault(map, defaultLayers)
+            // Set the map object to the reference
+            map.current = newMap;
+        }
+    }, [apiKey]);
 
     return (
-        <div className="map-area flex-c-c flex-dir-column">
+        <div className="map-area flex-c-c flex-dir-column" ref={mapRef}>
             {/* <h1><b>MAP STUFF HERE</b></h1> */}
 
         </div>

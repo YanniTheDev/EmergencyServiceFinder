@@ -29,14 +29,16 @@ export const SearchArea = (props) => {
             //Testing stuff
             //console.log(apiResponse);
 
-            findPetrolStations(apiResponseCoords);
+            findRestaurants(apiResponseCoords);
 
         }).catch((error) => {
             console.error(error);
         })
     }
 
-    const findPetrolStations = (coords) => {
+    const [validRestaurants, setValidRestaurants] = useState([]);
+
+    const findRestaurants = (coords) => {
         let url = `https://discover.search.hereapi.com/v1/discover?at=${coords.lat},${coords.lng}&q=restaurants&apiKey=${props.apiKey}`
     
         //API REQUEST!!
@@ -45,12 +47,17 @@ export const SearchArea = (props) => {
             //Weird React thing going on. Why make new variable am i right???
             let restaurants = response.data.items;
 
-            let validRestaurants = restaurants.filter((element) => {
+            let inDistanceRestaurants = restaurants.filter(
                 //converting the distance from metres to kilometres
-                return (element.distance / 1000) <= maxTravelDistance;
-            })
+                (element) => ((element.distance / 1000) <= maxTravelDistance)
+            ) 
+            
+            setValidRestaurants(inDistanceRestaurants);
+
+            //validRestaurants[n].position.lat/lng for the position of the nth restaurant
 
             console.log(restaurants);
+            console.log(inDistanceRestaurants);
             console.log(validRestaurants);
 
         }).catch((error) => {

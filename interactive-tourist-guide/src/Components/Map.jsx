@@ -1,7 +1,9 @@
 import "../ComponentCSS/MapArea.css";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useContext } from "react";
 import H from "@here/maps-api-for-javascript";
+
+import { AppContext } from "../App";
 
 export const Map = ({ apiKey }) => {
 
@@ -45,6 +47,19 @@ export const Map = ({ apiKey }) => {
             map.current = newMap;
         }
     }, [apiKey]);
+
+    const { validRestaurants, setValidRestaurants } = useContext(AppContext);
+    const { displayMarker, setDisplayMarker } = useContext(AppContext);
+
+    console.log(typeof(validRestaurants));
+
+    if (displayMarker == 1) {
+        validRestaurants.forEach(element => {
+            
+            let restaurantMarker = new H.map.Marker({lat: element.position.lat, lng: element.position.lng});
+            map.addObject(restaurantMarker);
+        });
+    }
 
     return (
         <div className="map-area flex-c-c flex-dir-column" ref={mapRef}>

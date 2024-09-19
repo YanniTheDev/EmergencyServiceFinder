@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import Axios from "axios";
 
 import "../ComponentCSS/SearchArea.css";
-import "../Reusables.css"
+import "../Reusables.css";
+
+import { AppContext } from "../App";
 
 export const SearchArea = (props) => {
 
@@ -36,9 +38,13 @@ export const SearchArea = (props) => {
         })
     }
 
-    const [validRestaurants, setValidRestaurants] = useState([]);
+    const { validRestaurants, setValidRestaurants } = useContext(AppContext);
+    const { displayMarker, setDisplayMarker } = useContext(AppContext);
 
     const findRestaurants = (coords) => {
+
+        setDisplayMarker(0);
+
         let url = `https://discover.search.hereapi.com/v1/discover?at=${coords.lat},${coords.lng}&q=restaurants&apiKey=${props.apiKey}`
     
         //API REQUEST!!
@@ -52,13 +58,15 @@ export const SearchArea = (props) => {
                 (element) => ((element.distance / 1000) <= maxTravelDistance)
             ) 
             
-            setValidRestaurants(inDistanceRestaurants);
+            setValidRestaurants(...inDistanceRestaurants);
 
             //validRestaurants[n].position.lat/lng for the position of the nth restaurant
 
             console.log(restaurants);
             console.log(inDistanceRestaurants);
             console.log(validRestaurants);
+
+            setDisplayMarker(1);
 
         }).catch((error) => {
             console.error(error);

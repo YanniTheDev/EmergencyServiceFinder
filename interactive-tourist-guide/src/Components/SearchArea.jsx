@@ -38,8 +38,9 @@ export const SearchArea = (props) => {
         })
     }
 
-    const { validRestaurants, setValidRestaurants } = useContext(AppContext);
-    const { displayMarker, setDisplayMarker } = useContext(AppContext);
+    const { restaurants, marker } = useContext(AppContext);
+    const [validRestaurants, setValidRestaurants] = restaurants;
+    const [displayMarker, setDisplayMarker] = marker;
 
     const findRestaurants = (coords) => {
 
@@ -58,13 +59,7 @@ export const SearchArea = (props) => {
                 (element) => ((element.distance / 1000) <= maxTravelDistance)
             ) 
             
-            setValidRestaurants(...inDistanceRestaurants);
-
-            //validRestaurants[n].position.lat/lng for the position of the nth restaurant
-
-            console.log(restaurants);
-            console.log(inDistanceRestaurants);
-            console.log(validRestaurants);
+            setValidRestaurants(inDistanceRestaurants);
 
             setDisplayMarker(1);
 

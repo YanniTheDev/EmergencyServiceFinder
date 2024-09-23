@@ -11,6 +11,10 @@ export const Map = ({ apiKey }) => {
     const map = useRef(null);
     const platform = useRef(null);
 
+    const { restaurants, marker } = useContext(AppContext);
+    const [validRestaurants, setValidRestaurants] = restaurants;
+    const [displayMarker, setDisplayMarker] = marker;
+    
     useEffect(() => {
         // Check if the map object has already been created
         if (!map.current) {
@@ -34,7 +38,7 @@ export const Map = ({ apiKey }) => {
                     center: {
                         lat: 64.144,
                         lng: -21.94,
-                    },
+                   },
                 }
             );
 
@@ -46,19 +50,23 @@ export const Map = ({ apiKey }) => {
             // Set the map object to the reference
             map.current = newMap;
         }
-    }, [apiKey]);
-
-    const { validRestaurants, setValidRestaurants } = useContext(AppContext);
-    const { displayMarker, setDisplayMarker } = useContext(AppContext);
-
-    console.log(typeof(validRestaurants));
+    }, [apiKey, displayMarker]);
 
     if (displayMarker == 1) {
+
+        map.current.removeObjects(map.current.getObjects());
+
         validRestaurants.forEach(element => {
             
             let restaurantMarker = new H.map.Marker({lat: element.position.lat, lng: element.position.lng});
-            map.addObject(restaurantMarker);
+            try {
+                map.current.addObject(restaurantMarker);
+            } catch (error) {
+                console.log(error)
+            }
         });
+
+        setDisplayMarker(0);
     }
 
     return (

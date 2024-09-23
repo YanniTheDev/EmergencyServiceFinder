@@ -25,7 +25,7 @@ function App() {
         <SearchArea apiKey={apiKey}/> 
         <Map apiKey={apiKey} /> */}
 
-        <AppContext.Provider value={{validRestaurants, setValidRestaurants, displayMarker, setDisplayMarker}}>
+        <AppContext.Provider value={{ restaurants: [validRestaurants, setValidRestaurants], marker: [displayMarker, setDisplayMarker]}}>
           {/* Components */}
           {/* Using props! */}
           <SearchArea apiKey={apiKey}/> 

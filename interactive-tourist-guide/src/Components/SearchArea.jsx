@@ -19,7 +19,6 @@ export const SearchArea = (props) => {
         setMaxTravelDistance(event.target.value);
     }
 
-
     const geoCodeAddress = () => {
         let url = `https://geocode.search.hereapi.com/v1/geocode?q=${address}&apiKey=${props.apiKey}`
 
@@ -32,15 +31,15 @@ export const SearchArea = (props) => {
             //console.log(apiResponse);
 
             findRestaurants(apiResponseCoords);
-
         }).catch((error) => {
             console.error(error);
         })
     }
 
-    const { restaurants, marker } = useContext(AppContext);
+    const { restaurants, marker, user } = useContext(AppContext);
     const [validRestaurants, setValidRestaurants] = restaurants;
     const [displayMarker, setDisplayMarker] = marker;
+    const [userCoord, setUserCoord] = user;
 
     const findRestaurants = (coords) => {
 
@@ -61,7 +60,9 @@ export const SearchArea = (props) => {
             
             setValidRestaurants(inDistanceRestaurants);
 
+            
             setDisplayMarker(1);
+            // setUserCoord(coords);
 
         }).catch((error) => {
             console.error(error);

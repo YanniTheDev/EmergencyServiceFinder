@@ -11,9 +11,10 @@ export const Map = ({ apiKey }) => {
     const map = useRef(null);
     const platform = useRef(null);
 
-    const { restaurants, marker } = useContext(AppContext);
+    const { restaurants, marker, user } = useContext(AppContext);
     const [validRestaurants, setValidRestaurants] = restaurants;
     const [displayMarker, setDisplayMarker] = marker;
+    // const [userCoord, setUserCoord] = user;
     
     useEffect(() => {
         // Check if the map object has already been created
@@ -29,15 +30,18 @@ export const Map = ({ apiKey }) => {
                 pois: true
             });
 
+            // const zoomCenter = userCoord;
+
             // Create a new map instance with the Tile layer, center and zoom level
             // Instantiate (and display) a map:
             const newMap = new H.Map(
                 mapRef.current,
                 defaultLayers.vector.normal.map, {
-                    zoom: 14,
+                    zoom: 3,
                     center: {
-                        lat: 64.144,
-                        lng: -21.94,
+                        // ...zoomCenter,
+                        lat: 21,
+                        lng: 64.144,
                    },
                 }
             );

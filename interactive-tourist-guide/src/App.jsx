@@ -14,6 +14,7 @@ function App() {
 
   const [validRestaurants, setValidRestaurants] = useState([]);
   const [displayMarker, setDisplayMarker] = useState(0);
+  const [userCoord, setUserCoord] = useState({lat: 64.144, lng: -21.94});
 
   return (
     <>
@@ -25,7 +26,7 @@ function App() {
         <SearchArea apiKey={apiKey}/> 
         <Map apiKey={apiKey} /> */}
 
-        <AppContext.Provider value={{ restaurants: [validRestaurants, setValidRestaurants], marker: [displayMarker, setDisplayMarker]}}>
+        <AppContext.Provider value={{ restaurants: [validRestaurants, setValidRestaurants], marker: [displayMarker, setDisplayMarker], user: [userCoord, setUserCoord]}}>
           {/* Components */}
           {/* Using props! */}
           <SearchArea apiKey={apiKey}/> 

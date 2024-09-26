@@ -45,18 +45,16 @@ export const AppContent = (props) => {
     
         //API REQUEST!!
         Axios.get(url).then((response) => {
+            const restaurants = response.data.items;
 
-            //Weird React thing going on. Why make new variable am i right???
-            let restaurants = response.data.items;
-
-            let inDistanceRestaurants = restaurants.filter(
+            const inDistanceRestaurants = restaurants.filter(
                 //converting the distance from metres to kilometres
                 (element) => ((element.distance / 1000) <= maxTravelDistance)
             ) 
-            
+                
             setValidRestaurants(inDistanceRestaurants);
 
-            console.log(validRestaurants);
+            console.log(restaurants, validRestaurants);
 
             //Calls the function to add markers to the map
             mapRef.current.addRestaurantMarkers();

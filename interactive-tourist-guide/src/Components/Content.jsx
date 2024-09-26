@@ -56,14 +56,16 @@ export const AppContent = (props) => {
             
             setValidRestaurants(inDistanceRestaurants);
 
+            console.log(validRestaurants);
+
+            //Calls the function to add markers to the map
+            mapRef.current.addRestaurantMarkers();
+            //Calls the function to display the map
+            mapRef.current.displayMap();
+
         }).catch((error) => {
             console.error(error);
         })
-
-        //Calls the function to add markers to the map
-        mapRef.current.addRestaurantMarkers();
-        //Calls the function to display the map
-        mapRef.current.displayMap();
     }
 
     const mapRef = useRef();

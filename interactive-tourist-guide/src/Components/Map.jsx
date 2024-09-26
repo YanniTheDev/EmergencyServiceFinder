@@ -11,7 +11,7 @@ export const Map = forwardRef(({ apiKey, userCoord, validRestaurants }, ref) => 
 
     useEffect(() => {
         displayMap();
-    }, [apiKey]);
+    }, [apiKey, userCoord]);
 
     //Exposes the displayMap function to the parent component
     useImperativeHandle(ref, () => {
@@ -62,6 +62,8 @@ export const Map = forwardRef(({ apiKey, userCoord, validRestaurants }, ref) => 
     const addRestaurantMarkers = () => {
 
         map.current.removeObjects(map.current.getObjects());
+
+        console.log(validRestaurants);
         
         validRestaurants.forEach(element => {
             

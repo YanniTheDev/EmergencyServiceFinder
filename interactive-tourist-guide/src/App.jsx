@@ -4,6 +4,8 @@ import "./Reusables.css";
 import { SearchArea } from './Components/SearchArea.jsx';
 import { Map } from "./Components/Map.jsx";
 
+import { AppContent } from "./Components/Content.jsx";
+
 import { createContext, useContext, useState } from 'react';
 
 export const AppContext = createContext();
@@ -26,12 +28,15 @@ function App() {
         <SearchArea apiKey={apiKey}/> 
         <Map apiKey={apiKey} /> */}
 
-        <AppContext.Provider value={{ restaurants: [validRestaurants, setValidRestaurants], marker: [displayMarker, setDisplayMarker], user: [userCoord, setUserCoord]}}>
+        {/* <AppContext.Provider value={{ restaurants: [validRestaurants, setValidRestaurants], marker: [displayMarker, setDisplayMarker], user: [userCoord, setUserCoord]}}>
           {/* Components */}
           {/* Using props! */}
+        {/*
           <SearchArea apiKey={apiKey}/> 
           <Map apiKey={apiKey} />
-        </AppContext.Provider>
+        </AppContext.Provider> */}
+
+        <AppContent apiKey={apiKey}/>
 
       </div>
     </>

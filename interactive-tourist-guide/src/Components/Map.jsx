@@ -1,25 +1,30 @@
 import "../ComponentCSS/MapArea.css";
 
-import { useRef, useEffect, useContext } from "react";
+import { useRef, useEffect, forwardRef, useImperativeHandle } from "react";
 import H from "@here/maps-api-for-javascript";
 
-import { AppContext } from "../App";
-
-export const Map = ({ apiKey }) => {
+export const Map = forwardRef(({ apiKey, userCoord, validRestaurants }, ref) => {
 
     const mapRef = useRef(null);
     const map = useRef(null);
     const platform = useRef(null);
 
-    const { restaurants, marker, user } = useContext(AppContext);
-    const [validRestaurants, setValidRestaurants] = restaurants;
-    const [displayMarker, setDisplayMarker] = marker;
-    // const [userCoord, setUserCoord] = user;
-    
     useEffect(() => {
+        displayMap();
+    }, [apiKey]);
+
+    //Exposes the displayMap function to the parent component
+    useImperativeHandle(ref, () => {
+        return {
+            displayMap: displayMap,
+            addRestaurantMarkers: addRestaurantMarkers, 
+        }
+    });
+
+    const displayMap = () => {
+
         // Check if the map object has already been created
         if (!map.current) {
-
             // Create a platform object with the API key and useCIT option
             platform.current = new H.service.Platform({
                 apiKey
@@ -29,8 +34,6 @@ export const Map = ({ apiKey }) => {
             const defaultLayers = platform.current.createDefaultLayers({
                 pois: true
             });
-
-            // const zoomCenter = userCoord;
 
             // Create a new map instance with the Tile layer, center and zoom level
             // Instantiate (and display) a map:
@@ -50,16 +53,16 @@ export const Map = ({ apiKey }) => {
             const behavior = new H.mapevents.Behavior(
                 new H.mapevents.MapEvents(newMap)
             );
-
+            
             // Set the map object to the reference
             map.current = newMap;
         }
-    }, [apiKey, displayMarker]);
+    }
 
-    if (displayMarker == 1) {
+    const addRestaurantMarkers = () => {
 
         map.current.removeObjects(map.current.getObjects());
-
+        
         validRestaurants.forEach(element => {
             
             let restaurantMarker = new H.map.Marker({lat: element.position.lat, lng: element.position.lng});
@@ -70,7 +73,6 @@ export const Map = ({ apiKey }) => {
             }
         });
 
-        setDisplayMarker(0);
     }
 
     return (
@@ -79,4 +81,4 @@ export const Map = ({ apiKey }) => {
 
         </div>
     );
-}
+});

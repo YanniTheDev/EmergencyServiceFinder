@@ -19,7 +19,7 @@ export const AppContent = (props) => {
         setMaxTravelDistance(event.target.value);
     }
 
-    const [userCoord, setUserCoord] = useState({});
+    const [userCoord, setUserCoord] = useState({lat: 21, lng: 61.144});
 
     const geoCodeAddress = () => {
         let url = `https://geocode.search.hereapi.com/v1/geocode?q=${address}&apiKey=${props.apiKey}`
@@ -39,6 +39,8 @@ export const AppContent = (props) => {
 
     const [validRestaurants, setValidRestaurants] = useState([]);
 
+    let inDistanceRestaurants = [];
+
     const findRestaurants = (coords) => {
 
         let url = `https://discover.search.hereapi.com/v1/discover?at=${coords.lat},${coords.lng}&q=restaurants&apiKey=${props.apiKey}`
@@ -47,19 +49,15 @@ export const AppContent = (props) => {
         Axios.get(url).then((response) => {
             const restaurants = response.data.items;
 
-            const inDistanceRestaurants = restaurants.filter(
+            inDistanceRestaurants = restaurants.filter(
                 //converting the distance from metres to kilometres
                 (element) => ((element.distance / 1000) <= maxTravelDistance)
             ) 
                 
             setValidRestaurants(inDistanceRestaurants);
 
-            console.log(restaurants, validRestaurants);
-
             //Calls the function to add markers to the map
-            mapRef.current.addRestaurantMarkers();
-            //Calls the function to display the map
-            mapRef.current.displayMap();
+            mapRef.current.addRestaurantMarkers(inDistanceRestaurants);
 
         }).catch((error) => {
             console.error(error);
@@ -88,7 +86,7 @@ export const AppContent = (props) => {
                 </button>
             </div>
 
-            <Map apiKey={props.apiKey} userCoord={userCoord} validRestaurants={validRestaurants} ref={mapRef}/>
+            <Map apiKey={props.apiKey} userCoord={userCoord} ref={mapRef}/>
 
         </div>
     );

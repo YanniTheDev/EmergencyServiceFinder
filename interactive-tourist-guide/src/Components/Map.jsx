@@ -3,28 +3,17 @@ import "../ComponentCSS/MapArea.css";
 import { useRef, useEffect, forwardRef, useImperativeHandle } from "react";
 import H from "@here/maps-api-for-javascript";
 
-export const Map = forwardRef(({ apiKey, userCoord, validRestaurants }, ref) => {
+export const Map = forwardRef(({ apiKey, userCoord }, ref) => {
 
     const mapRef = useRef(null);
     const map = useRef(null);
     const platform = useRef(null);
 
+    let newMap = null;
+
     useEffect(() => {
-        displayMap();
-    }, [apiKey, userCoord]);
-
-    //Exposes the displayMap function to the parent component
-    useImperativeHandle(ref, () => {
-        return {
-            displayMap: displayMap,
-            addRestaurantMarkers: addRestaurantMarkers, 
-        }
-    });
-
-    const displayMap = () => {
-
-        // Check if the map object has already been created
         if (!map.current) {
+
             // Create a platform object with the API key and useCIT option
             platform.current = new H.service.Platform({
                 apiKey
@@ -37,15 +26,14 @@ export const Map = forwardRef(({ apiKey, userCoord, validRestaurants }, ref) => 
 
             // Create a new map instance with the Tile layer, center and zoom level
             // Instantiate (and display) a map:
-            const newMap = new H.Map(
+            newMap = new H.Map(
                 mapRef.current,
                 defaultLayers.vector.normal.map, {
-                    zoom: 3,
+                    zoom: 3.5,
                     center: {
                         // ...zoomCenter,
-                        lat: 21,
-                        lng: 64.144,
-                   },
+                        ...userCoord,
+                    },
                 }
             );
 
@@ -57,15 +45,21 @@ export const Map = forwardRef(({ apiKey, userCoord, validRestaurants }, ref) => 
             // Set the map object to the reference
             map.current = newMap;
         }
-    }
+        
+    }, [apiKey, userCoord]);
 
-    const addRestaurantMarkers = () => {
+    //Exposes the displayMap function to the parent component
+    useImperativeHandle(ref, () => {
+        return {
+            addRestaurantMarkers: addRestaurantMarkers, 
+        }
+    });
+
+    const addRestaurantMarkers = (inDistanceRestaurants) => {
 
         map.current.removeObjects(map.current.getObjects());
-
-        console.log(validRestaurants);
         
-        validRestaurants.forEach(element => {
+        inDistanceRestaurants.forEach(element => {
             
             let restaurantMarker = new H.map.Marker({lat: element.position.lat, lng: element.position.lng});
             try {

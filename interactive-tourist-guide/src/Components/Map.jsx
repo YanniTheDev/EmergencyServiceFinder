@@ -84,8 +84,8 @@ export const Map = forwardRef(({ apiKey, userCoord }, ref) => {
 
     }
     
-    const handleRoutes = () => {
-
+    const handleRoutes = (inDistanceRestaurants) => {
+        
     }
 
     return (

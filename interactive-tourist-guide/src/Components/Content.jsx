@@ -22,19 +22,25 @@ export const AppContent = (props) => {
     const [userCoord, setUserCoord] = useState({lat: 21, lng: 61.144});
 
     const geoCodeAddress = () => {
-        let url = `https://geocode.search.hereapi.com/v1/geocode?q=${address}&apiKey=${props.apiKey}`
+        if (address) {
+            let url = `https://geocode.search.hereapi.com/v1/geocode?q=${address}&apiKey=${props.apiKey}`
 
-        //API REQUEST!
-        Axios.get(url).then((response) => {
+            //API REQUEST!
+            Axios.get(url).then((response) => {
 
-            let apiResponseCoords = response.data.items[0].position;
+                let apiResponseCoords = response.data.items[0].position;
 
-            setUserCoord(apiResponseCoords);
+                setUserCoord(apiResponseCoords);
 
-            findRestaurants(apiResponseCoords);
-        }).catch((error) => {
-            console.error(error);
-        })
+                findRestaurants(apiResponseCoords);
+
+            }).catch((error) => {
+                console.error(error);
+            })
+        }
+        else {
+            console.warn("Address is likely to be empty!");
+        }
     }
 
     const [validRestaurants, setValidRestaurants] = useState([]);
@@ -58,6 +64,9 @@ export const AppContent = (props) => {
 
             //Calls the function to add markers to the map
             mapRef.current.addRestaurantMarkers(inDistanceRestaurants);
+
+            //Calculates the routes and draws them
+            mapRef.current.handleRoutes(inDistanceRestaurants);
 
         }).catch((error) => {
             console.error(error);

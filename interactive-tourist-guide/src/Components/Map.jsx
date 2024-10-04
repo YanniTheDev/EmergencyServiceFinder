@@ -57,7 +57,8 @@ export const Map = forwardRef(({ apiKey, userCoord }, ref) => {
     });
 
     const addRestaurantMarkers = (inDistanceRestaurants) => {
-
+        
+        //Removes all objects such as markers
         map.current.removeObjects(map.current.getObjects());
 
         // Define a variable holding SVG mark-up that defines an icon image:
@@ -84,8 +85,60 @@ export const Map = forwardRef(({ apiKey, userCoord }, ref) => {
 
     }
     
+    //plaform -> platform.current, map -> map.current, start -> userCoord, destination -> inDistanceRestaurants
+
     const handleRoutes = (inDistanceRestaurants) => {
         
+        //Calculates route for each restaurant
+        inDistanceRestaurants.forEach((element) => {
+            setTimeout(() => {
+                calculateRoute(element);
+            }, 1000)
+        });
+    }
+
+    const calculateRoute = (element) => {
+
+        const routeResponseHandler = (response) => {
+
+            const sections = response.routes[0].sections;
+            const lineStrings = [];
+
+            sections.forEach((section) => {
+                //Converts the flexible polyline encoded string to geometry
+                lineStrings.push(H.geo.LineString.fromFlexiblePolyline(section.polyline));
+            });
+
+            const multiLineString = new H.geo.MultiLineString(lineStrings);
+            const bounds = multiLineString.getBoundingBox();
+
+            //Create the polyline for the route
+            const routePolyline = new H.map.Polyline(multiLineString, {
+                style: {
+                    lineWidth: 5
+                }
+            });
+
+            //Add the polyline to the map
+            map.current.addObject(routePolyline);
+            
+            //Make it so that the map automatically zooms into the user and the restaurants
+            map.current.getViewModel().setLookAtData({ bounds });
+        }
+
+        //Gets an instance of the H.service.RoutingService8 service
+        const router = platform.current.getRoutingService(null, 8);
+
+        //Defines the routing service parametres
+        const routingParams = {
+            'origin': `${userCoord.lat},${userCoord.lng}`,
+            'destination': `${element.position.lat},${element.position.lng}`,
+            'transportMode': 'car',
+            'return': 'polyline'
+        };
+
+        //Calls the routing service with the defined parametres
+        router.calculateRoute(routingParams, routeResponseHandler, console.error);
     }
 
     return (

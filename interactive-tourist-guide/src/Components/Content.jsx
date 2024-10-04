@@ -58,7 +58,12 @@ export const AppContent = (props) => {
             inDistanceRestaurants = restaurants.filter(
                 //converting the distance from metres to kilometres
                 (element) => ((element.distance / 1000) <= maxTravelDistance)
-            ) 
+            );
+
+            //Truncates the inDistanceRestaurant array to 10 restaurants
+            if (inDistanceRestaurants.length > 8) {
+                inDistanceRestaurants.length = 8;
+            }
                 
             setValidRestaurants(inDistanceRestaurants);
 
@@ -90,7 +95,7 @@ export const AppContent = (props) => {
                     <input type="number" placeholder="e.g. 35" onChange={getMaxTravelDistance}/>
                 </div>
 
-                <button onClick={geoCodeAddress}>
+                <button onClick={geoCodeAddress} title="Finds the nearest 8 restaurants!">
                     Find Restaurants
                 </button>
             </div>

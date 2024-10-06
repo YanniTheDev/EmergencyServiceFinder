@@ -81,3 +81,38 @@
     font-style: italic;
     color: rgb(143, 143, 143);
 }
+
+
+
+.loading-container {
+    z-index: 100;
+
+    display: flex;
+    justify-content: end;
+
+    width: 100vw;
+
+    position: absolute;
+}
+
+.loading-screen {
+    width: 60vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(28, 28, 28, 0.99);
+
+    z-index: 100;
+}
+
+.loading-wheel {
+    animation: rotating 2s linear infinite;
+}
+@keyframes rotating {
+    to {
+      transform: rotate(360deg);
+    }
+}

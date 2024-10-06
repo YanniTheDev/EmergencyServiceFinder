@@ -7,6 +7,8 @@ import { Map } from "./Map.jsx";
 import "../ComponentCSS/Content.css";
 import "../Reusables.css";
 
+import loadingWheel from "../Images/loading.png";
+
 export const AppContent = (props) => {
 
     const [address, setAddress] = useState("");
@@ -19,10 +21,18 @@ export const AppContent = (props) => {
         setMaxTravelDistance(event.target.value);
     }
 
+    const [loading, setLoading] = useState(false);
+    
+    const finishLoading = () => {
+        setLoading(false);
+    }
+    
     const [userCoord, setUserCoord] = useState({lat: 21, lng: 61.144});
 
     const geoCodeAddress = () => {
         if (address) {
+            setLoading(true);
+
             let url = `https://geocode.search.hereapi.com/v1/geocode?q=${address}&apiKey=${props.apiKey}`
 
             //API REQUEST!
@@ -100,7 +110,17 @@ export const AppContent = (props) => {
                 </button>
             </div>
 
-            <Map apiKey={props.apiKey} userCoord={userCoord} ref={mapRef}/>
+            {
+                loading && (
+                    <div className="loading-container">
+                        <div className="loading-screen">
+                            <img src={loadingWheel} alt="Loading wheel" className="loading-wheel"/>
+                        </div>
+                    </div>
+                )
+            }
+
+            <Map apiKey={props.apiKey} userCoord={userCoord} finishLoading={finishLoading} ref={mapRef}/>
 
         </div>
     );

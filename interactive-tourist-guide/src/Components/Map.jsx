@@ -3,7 +3,7 @@ import "../ComponentCSS/MapArea.css";
 import { useRef, useEffect, forwardRef, useImperativeHandle } from "react";
 import H from "@here/maps-api-for-javascript";
 
-export const Map = forwardRef(({ apiKey, userCoord }, ref) => {
+export const Map = forwardRef(({ apiKey, userCoord, finishLoading }, ref) => {
 
     const mapRef = useRef(null);
     const map = useRef(null);
@@ -95,6 +95,10 @@ export const Map = forwardRef(({ apiKey, userCoord }, ref) => {
                 calculateRoute(element);
             }, 1000)
         });
+
+        setTimeout(() => {
+            finishLoading();
+        }, 2000)
     }
 
     const calculateRoute = (element) => {

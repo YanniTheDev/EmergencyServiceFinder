@@ -35,6 +35,8 @@ export const AppContent = (props) => {
     const [userCoord, setUserCoord] = useState({lat: 21, lng: 61.144}); //Default coords of which the map should be centered at
 
     const geoCodeAddress = () => {
+
+        //If the address is "truthy", then execute code inside the if statement
         if (address) {
             setLoading(true);
 

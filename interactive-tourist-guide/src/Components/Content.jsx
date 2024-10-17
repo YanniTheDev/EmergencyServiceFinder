@@ -70,7 +70,7 @@ export const AppContent = (props) => {
                 (element) => ((element.distance / 1000) <= maxTravelDistance)
             );
 
-            //Truncates the inDistanceRestaurant array to 10 restaurants
+            //Truncates the inDistanceRestaurant array to 8 restaurants
             if (inDistanceRestaurants.length > 8) {
                 inDistanceRestaurants.length = 8;
             }

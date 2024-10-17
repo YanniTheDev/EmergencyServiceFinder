@@ -26,8 +26,7 @@ export const AppContent = (props) => {
     }
 
     const [loading, setLoading] = useState(false);
-
-    //Since at the start of the program, there is nothing loading, then it is defaultly set to false
+    
     const finishLoading = () => {
         setLoading(false);
     }

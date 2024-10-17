@@ -69,6 +69,7 @@ export const AppContent = (props) => {
 
     let inDistanceRestaurants = [];
 
+    //Function to find restaurants with the coords of the user
     const findRestaurants = (coords) => {
 
         let url = `https://discover.search.hereapi.com/v1/discover?at=${coords.lat},${coords.lng}&q=restaurants&apiKey=${props.apiKey}`
@@ -102,6 +103,7 @@ export const AppContent = (props) => {
 
     const mapRef = useRef();
 
+    //Rendering things
     return (
         <div className="content-area flex-s-s flex-dir-row">
             <div className="search-area flex-dir-col flex-c-c">

@@ -12,16 +12,22 @@ import loadingWheel from "../Images/loading.png";
 export const AppContent = (props) => {
 
     const [address, setAddress] = useState("");
+
+    //Sets the address state to whatever the user puts in the input field
     const getAddress = (event) => {
         setAddress(event.target.value);
     }
     
     const [maxTravelDistance, setMaxTravelDistance] = useState(0);
+
+    //Similar to the address state
     const getMaxTravelDistance = (event) => {
         setMaxTravelDistance(event.target.value);
     }
 
     const [loading, setLoading] = useState(false);
+
+    //Since at the start of the program, there is nothing loading, then it is defaultly set to false
     const finishLoading = () => {
         setLoading(false);
     }

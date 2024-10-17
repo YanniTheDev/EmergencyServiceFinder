@@ -32,12 +32,15 @@ export const AppContent = (props) => {
         setLoading(false);
     }
     
-    const [userCoord, setUserCoord] = useState({lat: 21, lng: 61.144}); //Default coords of which the map should be centered at
+    //Default coords of which the map should be centered at
+    const [userCoord, setUserCoord] = useState({lat: 21, lng: 61.144}); 
 
     const geoCodeAddress = () => {
 
         //If the address is "truthy", then execute code inside the if statement
         if (address) {
+
+            //Now it is loading so display loading wheel
             setLoading(true);
 
             let url = `https://geocode.search.hereapi.com/v1/geocode?q=${address}&apiKey=${props.apiKey}`
@@ -52,10 +55,12 @@ export const AppContent = (props) => {
                 findRestaurants(apiResponseCoords);
 
             }).catch((error) => {
+                //If something goes wrong, then log that error
                 console.error(error);
             })
         }
         else {
+            //If the address is not truthy, then it will warn the user that nothing has happened and it is most likely because the address is likely to be empty
             console.warn("Address is likely to be empty!");
         }
     }

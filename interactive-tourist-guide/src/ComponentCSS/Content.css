@@ -1,11 +1,19 @@
 .search-area {
+    
+    /* Configures the search area to have the specified colour, and the specified dimensions */
+
     background-color: blanchedalmond;
 
     width: 40vw;
     height: 100vh;
 }
 
+
+/* I have set the parametres for this button based on testing and trialling */
 .search-area button {
+
+    /* Configures the button to have some spacing inside with a white background, specified dimensions, and an hover over animation */
+
     padding: 10px 10px 10px 10px;
 
     background-color: white;

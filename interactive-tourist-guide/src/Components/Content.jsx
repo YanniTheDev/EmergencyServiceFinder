@@ -32,7 +32,7 @@ export const AppContent = (props) => {
         setLoading(false);
     }
     
-    const [userCoord, setUserCoord] = useState({lat: 21, lng: 61.144});
+    const [userCoord, setUserCoord] = useState({lat: 21, lng: 61.144}); //Default coords of which the map should be centered at
 
     const geoCodeAddress = () => {
         if (address) {

@@ -1,3 +1,5 @@
+//I have split CSS files so that each component has their own CSS file.
+//Reusables.css are for styles that are use universally
 import './App.css';
 import "./Reusables.css";
 
@@ -15,6 +17,7 @@ function App() {
     <>
       <div className="app flex-s-s flex-dir-row">
 
+        {/* Component */}
         <AppContent apiKey={apiKey}/>
 
       </div>

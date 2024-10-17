@@ -1,7 +1,6 @@
 .search-area {
-    
-    /* Configures the search area to have the specified colour, and the specified dimensions */
 
+    /* The colour I have chosen is a Pastel colour, which is a colour that dyslexic people have a better time associating with */
     background-color: blanchedalmond;
 
     width: 40vw;
@@ -9,10 +8,7 @@
 }
 
 
-/* I have set the parametres for this button based on testing and trialling */
 .search-area button {
-
-    /* Configures the button to have some spacing inside with a white background, specified dimensions, and an hover over animation */
 
     padding: 10px 10px 10px 10px;
 
@@ -22,11 +18,13 @@
     height: 10vh;
 
     border: none;
+    /* Giving a round border to a buttom gives a modern feel */
     border-radius: 10px;
 
     font-size: 1.6vw;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
+    /* I have added a transition animation so that when the user hovers over the button, there is a response in the program to make it seem responsive */
     transition: box-shadow 0.2s ease-in-out;
 }
 
@@ -93,6 +91,9 @@
 
 
 .loading-container {
+    
+    /* The z-index lets UI to be order based on its z-index */
+    /* Here I have set the z-index to 100 so the loading container appears in front of the map */
     z-index: 100;
 
     display: flex;

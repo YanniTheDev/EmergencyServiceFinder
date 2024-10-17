@@ -22,7 +22,6 @@ export const AppContent = (props) => {
     }
 
     const [loading, setLoading] = useState(false);
-    
     const finishLoading = () => {
         setLoading(false);
     }

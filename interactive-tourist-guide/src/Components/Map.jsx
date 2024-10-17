@@ -1,3 +1,4 @@
+//Using the CSS file FOR this component
 import "../ComponentCSS/MapArea.css";
 
 import { useRef, useEffect, forwardRef, useImperativeHandle } from "react";
@@ -73,6 +74,7 @@ export const Map = forwardRef(({ apiKey, userCoord, finishLoading }, ref) => {
 
         map.current.addObject(homeMarker);
         
+        //Loops over each restaurant property in the object and adds a marker on the map for that restaurant
         inDistanceRestaurants.forEach(element => {
             
             let restaurantMarker = new H.map.Marker({lat: element.position.lat, lng: element.position.lng});

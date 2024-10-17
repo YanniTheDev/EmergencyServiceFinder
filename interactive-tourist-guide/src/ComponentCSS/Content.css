@@ -108,6 +108,7 @@
     z-index: 100;
 }
 
+/* Manually  animates the loading wheel so it spins*/
 .loading-wheel {
     animation: rotating 2s linear infinite;
 }

@@ -116,7 +116,7 @@ export const AppContent = (props) => {
                 <div className="distance-container flex-dir-col flex-c-c">
                     <h1>Maximum Travel Distance (KM)</h1>
 
-                    <input type="number" placeholder="e.g. 35" onChange={getMaxTravelDistance}/>
+                    <input type="number" placeholder="e.g. 35" min={0} onChange={getMaxTravelDistance}/>
                 </div>
 
                 <button onClick={geoCodeAddress} title="Finds the nearest 8 restaurants!">

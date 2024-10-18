@@ -11,6 +11,7 @@ export const AppContext = createContext();
 
 function App() {
 
+  //API key that is important from the .env file so it is secure and people cannot randomly access it
   const apiKey = import.meta.env.VITE_HERE_API_KEY;
 
   return (

@@ -8,3 +8,9 @@
 .map-area h1 {
     font-size: 100px;
 }
+
+@media only screen and (max-wdth: 750px) {
+    .map-area {
+        width: 100vw;
+    }
+}

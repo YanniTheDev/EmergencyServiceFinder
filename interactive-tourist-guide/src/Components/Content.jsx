@@ -105,7 +105,7 @@ export const AppContent = (props) => {
 
     //Rendering things
     return (
-        <div className="content-area flex-s-s flex-dir-row">
+        <div className={props.isMobile ? "content-area flex-s-s flex-dir-col" : "content-area flex-s-s flex-dir-row"}>
             <div className="search-area flex-dir-col flex-c-c">
                 <div className="address-container flex-dir-col flex-c-c">
                     <h1>Enter Your Address</h1>

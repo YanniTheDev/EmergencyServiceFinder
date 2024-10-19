@@ -17,6 +17,9 @@ function App() {
   
   const [isMobile, setIsMobile] = useState(window.innerWidth < 750);
 
+  //This key state allows us to force re-renders
+  const [key, setKey] = useState(0);
+
   useEffect(() => {
 
     //Updates the windowWidth state
@@ -27,20 +30,21 @@ function App() {
 
     const mobile = window.innerWidth < 750;
     setIsMobile(mobile);
+    setKey((current) => current + 1);
 
     //Removes the event listener as we only want one handleResized to be called once per render
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [window.innerWidth]);
 
   //Creates a reference to the div so we can access its properties
   const contentElement = useRef(null);
 
   return (
     <>
-      <div className={isMobile ? "app flex-s-s flex-dir-col" : "app flex-s-s flex-dir-row"} ref={contentElement}>
+      <div className={isMobile ? "app flex-s-s flex-dir-col" : "app flex-s-s flex-dir-row"} ref={contentElement} key={key}>
 
         {/* Component */}
-        <AppContent apiKey={apiKey}/>
+        <AppContent apiKey={apiKey} isMobile={isMobile}/>
 
       </div>
     </>

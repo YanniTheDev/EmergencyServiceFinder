@@ -7,6 +7,12 @@
     height: 100vh;
 }
 
+/* If the window is less or equal to 750px, then it will make the search area 100% of the device's width */
+@media only screen and (max-width: 750px) {
+    .search-area {
+        width: 100vw;
+    }
+}
 
 .search-area button {
 

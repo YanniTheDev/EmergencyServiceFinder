@@ -5,9 +5,7 @@ import "./Reusables.css";
 
 import { AppContent } from "./Components/Content.jsx";
 
-import { createContext } from 'react';
-
-export const AppContext = createContext();
+import { useState, useEffect } from 'react';
 
 function App() {
 

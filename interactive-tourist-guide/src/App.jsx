@@ -14,6 +14,8 @@ function App() {
 
   //Getting the window width to allow responsiveness of website
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 750);
 
   useEffect(() => {
 
@@ -23,24 +25,19 @@ function App() {
     //Adds an event listener so that whenever the window gets resized, it will call the handleResize function
     window.addEventListener("resize", handleResize);
 
-    //If the window width is less than a certain amount of pixels, we will re-arrange the layout of the website
-    if (windowWidth <= 750) {
-      contentElement.current.className = "app flex-s-s flex-dir-col";
-    }
-    else {
-      contentElement.current.className = "app flex-s-s flex-dir-row";
-    }
+    const mobile = window.innerWidth < 750;
+    setIsMobile(mobile);
 
     //Removes the event listener as we only want one handleResized to be called once per render
     return () => window.removeEventListener("resize", handleResize);
-  }, [])
+  }, []);
 
   //Creates a reference to the div so we can access its properties
   const contentElement = useRef(null);
 
   return (
     <>
-      <div className="app flex-s-s flex-dir-row" ref={contentElement}>
+      <div className={isMobile ? "app flex-s-s flex-dir-col" : "app flex-s-s flex-dir-row"} ref={contentElement}>
 
         {/* Component */}
         <AppContent apiKey={apiKey}/>

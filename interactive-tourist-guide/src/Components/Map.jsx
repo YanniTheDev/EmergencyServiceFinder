@@ -46,6 +46,12 @@ export const Map = forwardRef(({ apiKey, userCoord, finishLoading }, ref) => {
             // Set the map object to the reference
             map.current = newMap;
         }
+
+        const handleResize = map.current.getViewPort().resize();
+
+        window.addEventListener("resize", handleResize);
+
+        return window.removeEventListener("resize", handleResize);
         
     }, [apiKey, userCoord]);
 
@@ -148,7 +154,7 @@ export const Map = forwardRef(({ apiKey, userCoord, finishLoading }, ref) => {
     }
 
     return (
-        <div className="map-area flex-c-c flex-dir-column" ref={mapRef}>
+        <div className="map-area flex-c-c flex-dir-row" ref={mapRef}>
             {/* <h1><b>MAP STUFF HERE</b></h1> */}
 
         </div>

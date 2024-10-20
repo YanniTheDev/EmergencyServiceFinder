@@ -3,6 +3,9 @@
 .map-area {
     width: 60vw;
     height: 100vh;
+
+    padding: 0;
+    margin: 0;
 }
 
 .map-area h1 {

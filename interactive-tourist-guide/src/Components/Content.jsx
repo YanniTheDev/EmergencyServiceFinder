@@ -101,6 +101,11 @@ export const AppContent = (props) => {
         })
     }
 
+    //Calls resize map function if isMobile is true
+    if (props.isMobile) {
+        mapRef.current.resizeMap();
+    }
+
     const mapRef = useRef();
 
     //Rendering things

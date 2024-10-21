@@ -46,22 +46,24 @@ export const Map = forwardRef(({ apiKey, userCoord, finishLoading }, ref) => {
             // Set the map object to the reference
             map.current = newMap;
         }
-
-        const handleResize = map.current.getViewPort().resize();
-
-        window.addEventListener("resize", handleResize);
-
-        return window.removeEventListener("resize", handleResize);
-        
     }, [apiKey, userCoord]);
 
     //Exposes the displayMap function to the parent component
     useImperativeHandle(ref, () => {
         return {
             addRestaurantMarkers: addRestaurantMarkers,
-            handleRoutes: handleRoutes
+            handleRoutes: handleRoutes,
+            resizeMap: resizeMap
         }
     });
+
+    const resizeMap = () => {
+        const handleResize = map.current.getViewPort().resize();
+
+        window.addEventListener("resize", handleResize);
+
+        window.removeEventListener("resize", handleResize);
+    }
 
     const addRestaurantMarkers = (inDistanceRestaurants) => {
         

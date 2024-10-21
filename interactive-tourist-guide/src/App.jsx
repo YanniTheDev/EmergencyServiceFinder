@@ -17,9 +17,6 @@ function App() {
   
   const [isMobile, setIsMobile] = useState(window.innerWidth < 750);
 
-  //This key state allows us to force re-renders
-  const [key, setKey] = useState(0);
-
   useEffect(() => {
 
     //Updates the windowWidth state

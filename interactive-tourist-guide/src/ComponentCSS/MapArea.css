@@ -12,8 +12,9 @@
     font-size: 100px;
 }
 
-@media only screen and (max-wdth: 750px) {
+@media only screen and (max-width: 750px) {
     .map-area {
         width: 100vw;
+        height: 90vh;
     }
 }

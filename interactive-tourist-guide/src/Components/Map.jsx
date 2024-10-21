@@ -4,7 +4,7 @@ import "../ComponentCSS/MapArea.css";
 import { useRef, useEffect, forwardRef, useImperativeHandle } from "react";
 import H from "@here/maps-api-for-javascript";
 
-export const Map = forwardRef(({ apiKey, userCoord, finishLoading }, ref) => {
+export const Map = forwardRef(({ apiKey, userCoord, finishLoading, isMobile }, ref) => {
 
     const mapRef = useRef(null);
     const map = useRef(null);
@@ -45,25 +45,22 @@ export const Map = forwardRef(({ apiKey, userCoord, finishLoading }, ref) => {
             
             // Set the map object to the reference
             map.current = newMap;
+
+            window.addEventListener("resize", () => {
+                console.log('resized');
+                console.log(map.current.getViewPort());
+                return map.current.getViewPort().resize();
+            });
         }
-    }, [apiKey, userCoord]);
+    }, [apiKey]);
 
     //Exposes the displayMap function to the parent component
     useImperativeHandle(ref, () => {
         return {
             addRestaurantMarkers: addRestaurantMarkers,
-            handleRoutes: handleRoutes,
-            resizeMap: resizeMap
+            handleRoutes: handleRoutes
         }
     });
-
-    const resizeMap = () => {
-        const handleResize = map.current.getViewPort().resize();
-
-        window.addEventListener("resize", handleResize);
-
-        window.removeEventListener("resize", handleResize);
-    }
 
     const addRestaurantMarkers = (inDistanceRestaurants) => {
         

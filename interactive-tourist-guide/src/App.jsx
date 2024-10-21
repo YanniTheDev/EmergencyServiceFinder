@@ -29,11 +29,11 @@ function App() {
     window.addEventListener("resize", handleResize);
 
     const mobile = window.innerWidth < 750;
-    setIsMobile(mobile);
-    setKey((current) => current + 1);
+    setIsMobile(mobile);;
 
     //Removes the event listener as we only want one handleResized to be called once per render
     return () => window.removeEventListener("resize", handleResize);
+
   }, [window.innerWidth]);
 
   //Creates a reference to the div so we can access its properties
@@ -41,7 +41,7 @@ function App() {
 
   return (
     <>
-      <div className={isMobile ? "app flex-s-s flex-dir-col" : "app flex-s-s flex-dir-row"} ref={contentElement} key={key}>
+      <div className={isMobile ? "app flex-s-s flex-dir-col" : "app flex-s-s flex-dir-row"} ref={contentElement}>
 
         {/* Component */}
         <AppContent apiKey={apiKey} isMobile={isMobile}/>

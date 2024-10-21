@@ -101,11 +101,6 @@ export const AppContent = (props) => {
         })
     }
 
-    //Calls resize map function if isMobile is true
-    if (props.isMobile) {
-        mapRef.current.resizeMap();
-    }
-
     const mapRef = useRef();
 
     //Rendering things
@@ -139,7 +134,7 @@ export const AppContent = (props) => {
                 )
             }
 
-            <Map apiKey={props.apiKey} userCoord={userCoord} finishLoading={finishLoading} ref={mapRef}/>
+            <Map apiKey={props.apiKey} userCoord={userCoord} finishLoading={finishLoading} isMobile={props.isMobile} ref={mapRef}/>
 
         </div>
     );

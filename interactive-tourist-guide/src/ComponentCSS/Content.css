@@ -134,3 +134,21 @@
       transform: rotate(360deg);
     }
 }
+
+@media only screen and (max-width: 750px) {
+    .loading-container {
+        width: 110vw;
+        height: 100vh;
+
+        overflow-y: hidden;
+
+        position: fixed;
+    }
+
+    .loading-screen {
+        width: 110vw;
+        height: 100vh;
+
+        overflow-y: hidden;
+    }
+}

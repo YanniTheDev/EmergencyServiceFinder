@@ -47,8 +47,6 @@ export const Map = forwardRef(({ apiKey, userCoord, finishLoading, isMobile }, r
             map.current = newMap;
 
             window.addEventListener("resize", () => {
-                console.log('resized');
-                console.log(map.current.getViewPort());
                 return map.current.getViewPort().resize();
             });
         }

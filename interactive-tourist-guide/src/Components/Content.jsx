@@ -37,11 +37,6 @@ export const AppContent = (props) => {
 
     const [errorCode, setErrorCode] = useState(undefined);
 
-    const errorMessages = {
-        0: "Please ensure that you have entered an address",
-        1: "The address that you have entered does not exist in our database"
-    }
-
     const geoCodeAddress = () => {
 
         //If the address is "truthy", then execute code inside the if statement
@@ -65,6 +60,7 @@ export const AppContent = (props) => {
                 //If something goes wrong, then log that error
                 console.error("Address does not exist in database!" + error);
                 setErrorCode(1);
+                setLoading(false);
             })
         }
         else {
@@ -133,7 +129,7 @@ export const AppContent = (props) => {
                 </button>
 
                 <div className="error-message">
-                    <h3>{errorCode == 0 ? "bam" : errorCode == 1 ? "boom" : ""}</h3>
+                    <h3>{errorCode == 0 ? "Please ensure that you have entered an address" : errorCode == 1 ? "The address that you have entered does not exist in our database" : ""}</h3>
                 </div>
             </div>
 

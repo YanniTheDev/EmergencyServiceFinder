@@ -35,6 +35,13 @@ export const AppContent = (props) => {
     //Default coords of which the map should be centered at
     const [userCoord, setUserCoord] = useState({lat: 21, lng: 61.144}); 
 
+    const [errorCode, setErrorCode] = useState(undefined);
+
+    const errorMessages = {
+        0: "Please ensure that you have entered an address",
+        1: "The address that you have entered does not exist in our database"
+    }
+
     const geoCodeAddress = () => {
 
         //If the address is "truthy", then execute code inside the if statement
@@ -56,12 +63,14 @@ export const AppContent = (props) => {
 
             }).catch((error) => {
                 //If something goes wrong, then log that error
-                console.error(error);
+                console.error("Address does not exist in database!" + error);
+                setErrorCode(1);
             })
         }
         else {
             //If the address is not truthy, then it will warn the user that nothing has happened and it is most likely because the address is likely to be empty
             console.warn("Address is likely to be empty!");
+            setErrorCode(0);
         }
     }
 
@@ -122,6 +131,10 @@ export const AppContent = (props) => {
                 <button onClick={geoCodeAddress} title="Finds the nearest 8 restaurants!">
                     Find Restaurants
                 </button>
+
+                <div className="error-message">
+                    <h3>{errorCode == 0 ? "bam" : errorCode == 1 ? "boom" : ""}</h3>
+                </div>
             </div>
 
             {

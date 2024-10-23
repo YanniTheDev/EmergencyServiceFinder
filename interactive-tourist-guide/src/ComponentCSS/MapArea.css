@@ -12,6 +12,7 @@
     font-size: 100px;
 }
 
+/* If screen width is less than 750px, then it will update styling */
 @media only screen and (max-width: 750px) {
     .map-area {
         width: 100vw;

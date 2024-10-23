@@ -128,7 +128,7 @@ export const AppContent = (props) => {
                     Find Restaurants
                 </button>
 
-                <div className="error-message">
+                <div className="error-message-container">
                     <h3>{errorCode == 0 ? "Please ensure that you have entered an address" : errorCode == 1 ? "The address that you have entered does not exist in our database" : ""}</h3>
                 </div>
             </div>

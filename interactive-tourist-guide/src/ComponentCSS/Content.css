@@ -150,5 +150,20 @@
 
 /* Specifies the style for the error message container */
 .error-message-container {
-    width: 1;
+    width: 20vw;
+    height: 10vh;
+
+    border-radius: 10px;
+
+    background-color: rgb(255, 92, 92);
+}
+
+.error-message-container h3 {
+    font-size: 1vw;
+
+    text-align: center;
+
+    line-height: 3vh;
+
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

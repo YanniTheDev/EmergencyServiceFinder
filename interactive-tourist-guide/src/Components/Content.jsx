@@ -35,7 +35,11 @@ export const AppContent = (props) => {
     //Default coords of which the map should be centered at
     const [userCoord, setUserCoord] = useState({lat: 21, lng: 61.144}); 
 
-    const [errorCode, setErrorCode] = useState(undefined);
+    const [errorCode, setErrorCode] = useState(0);
+    const errorMessages = [
+        "Please ensure you have entered an address",
+        "Your address does not exist in our database"
+    ]
 
     const geoCodeAddress = () => {
 
@@ -44,6 +48,9 @@ export const AppContent = (props) => {
 
             //Now it is loading so display loading wheel
             setLoading(true);
+
+            //Sets error code to nothing as there is nothing currently wrong
+            setErrorCode(0);
 
             let url = `https://geocode.search.hereapi.com/v1/geocode?q=${address}&apiKey=${props.apiKey}`
 
@@ -59,14 +66,14 @@ export const AppContent = (props) => {
             }).catch((error) => {
                 //If something goes wrong, then log that error
                 console.error("Address does not exist in database!" + error);
-                setErrorCode(1);
+                setErrorCode(2);
                 setLoading(false);
             })
         }
         else {
             //If the address is not truthy, then it will warn the user that nothing has happened and it is most likely because the address is likely to be empty
             console.warn("Address is likely to be empty!");
-            setErrorCode(0);
+            setErrorCode(1);
         }
     }
 
@@ -128,9 +135,14 @@ export const AppContent = (props) => {
                     Find Restaurants
                 </button>
 
-                <div className="error-message-container">
-                    <h3>{errorCode == 0 ? "Please ensure that you have entered an address" : errorCode == 1 ? "The address that you have entered does not exist in our database" : ""}</h3>
-                </div>
+                { 
+                    //If there is an error code, display error container
+                    !!errorCode && (
+                        <div className="error-message-container flex-c-c">
+                            <h3>{errorMessages[errorCode-1]}</h3>
+                        </div>
+                    )
+                }
             </div>
 
             {

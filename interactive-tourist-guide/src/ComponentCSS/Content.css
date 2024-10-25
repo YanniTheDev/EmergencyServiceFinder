@@ -159,11 +159,40 @@
 }
 
 .error-message-container h3 {
-    font-size: 1vw;
+    font-size: 1.2vw;
 
     text-align: center;
 
     line-height: 3vh;
 
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+/* RESPONSIVENESS */
+
+@media only screen and (max-width: 750px) {
+
+    .search-area button {
+        width: 25vw;
+
+        font-size: 3vw;
+    }
+
+    .address-container, .distance-container, .search-area button {
+        margin-bottom: 6vh;
+    }
+
+    .address-container h1, .distance-container h1 {
+        font-size: 5vw;
+    }
+
+    .error-message-container {
+        width: 35vw;
+        height: 8vh;
+    }
+
+    .error-message-container h3 {
+        font-size: 3vw;
+    }
 }

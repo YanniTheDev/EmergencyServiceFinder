@@ -51,13 +51,9 @@ export const Map = forwardRef(({ apiKey, userCoord, finishLoading, isMobile }, r
                 return map.current.getViewPort().resize();
             });
 
-            //Initiates a group
-            const initGroup = new H.map.Group();
-            group.current = initGroup;
-
             //Calls the function to add info bubbles to the markers
             const ui = H.ui.UI.createDefault(map.current, defaultLayers);
-            addInfoBubbles(ui, group.current);
+            addInfoBubbles(ui);
         }
     }, [apiKey]);
 
@@ -90,15 +86,13 @@ export const Map = forwardRef(({ apiKey, userCoord, finishLoading, isMobile }, r
         inDistanceRestaurants.forEach(element => {
             
             const html = (
-                '<div><a href="https://www.mcfc.co.uk" target="_blank">Manchester City</a></div>' +
-                '<div>City of Manchester Stadium<br />Capacity: 55,097</div>'
+                'Hi!'
             );
 
             let restaurantMarker = new H.map.Marker({lat: element.position.lat, lng: element.position.lng});
             restaurantMarker.setData(html);
 
             try {
-                group.current.addObject(restaurantMarker);
                 map.current.addObject(restaurantMarker);
             } catch (error) {
                 console.log(error)
@@ -106,25 +100,25 @@ export const Map = forwardRef(({ apiKey, userCoord, finishLoading, isMobile }, r
         });
     }
 
-    const addInfoBubbles = (ui, group) =>  {
-
-        map.current.addObject(group);
+    const addInfoBubbles = (ui) =>  {
 
         //Adds the tap event listener
-        group.addEventListener("tap", (event) => {
+        map.current.addEventListener("tap", (event) => {
 
             console.log(event);
 
-            // event target is the marker itself, group is a parent event target
-            // for all objects that it contains
-            const bubble = new H.ui.InfoBubble(event.target.getGeometry(), {
-
-                //Reads the data
-                content: event.target.getData()
-            });
-
-            //adds the info bubble
-            ui.addBubble(bubble);
+            if (event.target instanceof H.map.Marker) {
+                // event target is the marker itself, group is a parent event target
+                // for all objects that it contains
+                const bubble = new H.ui.InfoBubble(event.target.getGeometry(), {
+    
+                    //Reads the data
+                    content: event.target.getData()
+                });
+                
+                //adds the info bubble
+                ui.addBubble(bubble);
+            }
 
         }, false);
     }

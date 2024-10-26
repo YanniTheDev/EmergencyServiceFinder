@@ -9,6 +9,7 @@ export const Map = forwardRef(({ apiKey, userCoord, finishLoading, isMobile }, r
     const mapRef = useRef(null);
     const map = useRef(null);
     const platform = useRef(null);
+    const group = useRef(null);
 
     let newMap = null;
 
@@ -49,6 +50,14 @@ export const Map = forwardRef(({ apiKey, userCoord, finishLoading, isMobile }, r
             window.addEventListener("resize", () => {
                 return map.current.getViewPort().resize();
             });
+
+            //Initiates a group
+            const initGroup = new H.map.Group();
+            group.current = initGroup;
+
+            //Calls the function to add info bubbles to the markers
+            const ui = H.ui.UI.createDefault(map.current, defaultLayers);
+            addInfoBubbles(ui, group.current);
         }
     }, [apiKey]);
 
@@ -80,14 +89,44 @@ export const Map = forwardRef(({ apiKey, userCoord, finishLoading, isMobile }, r
         //Loops over each restaurant property in the object and adds a marker on the map for that restaurant
         inDistanceRestaurants.forEach(element => {
             
+            const html = (
+                '<div><a href="https://www.mcfc.co.uk" target="_blank">Manchester City</a></div>' +
+                '<div>City of Manchester Stadium<br />Capacity: 55,097</div>'
+            );
+
             let restaurantMarker = new H.map.Marker({lat: element.position.lat, lng: element.position.lng});
+            restaurantMarker.setData(html);
+
             try {
+                group.current.addObject(restaurantMarker);
                 map.current.addObject(restaurantMarker);
             } catch (error) {
                 console.log(error)
             }
         });
+    }
 
+    const addInfoBubbles = (ui, group) =>  {
+
+        map.current.addObject(group);
+
+        //Adds the tap event listener
+        group.addEventListener("tap", (event) => {
+
+            console.log(event);
+
+            // event target is the marker itself, group is a parent event target
+            // for all objects that it contains
+            const bubble = new H.ui.InfoBubble(event.target.getGeometry(), {
+
+                //Reads the data
+                content: event.target.getData()
+            });
+
+            //adds the info bubble
+            ui.addBubble(bubble);
+
+        }, false);
     }
     
     //plaform -> platform.current, map -> map.current, start -> userCoord, destination -> inDistanceRestaurants

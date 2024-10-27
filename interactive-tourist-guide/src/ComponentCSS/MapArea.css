@@ -20,6 +20,34 @@
     }
 }
 
-.H_ui .H_ib {
-    width: 3vw;
+/* Following styles are to style the info bubble */
+.H_ui .H_ib_body {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    padding-top: 2vh;
+
+    width: 15vw;
+    height: 20vh;
+
+    font-size: 4vw;
+
+    background-color: white;
+    
+    border-radius: 10px;
+}
+
+.H_ui .H_ib_close {
+    display: flex;
+    justify-content: end;
+
+    width: 12vw;
+
+    margin-bottom: 3vh;
+}
+
+.H_ui .H_ib_close svg {
+    width: 2vw;
 }

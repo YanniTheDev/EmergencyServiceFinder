@@ -12,14 +12,6 @@
     font-size: 100px;
 }
 
-/* If screen width is less than 750px, then it will update styling */
-@media only screen and (max-width: 750px) {
-    .map-area {
-        width: 100vw;
-        height: 90vh;
-    }
-}
-
 /* Following styles are to style the info bubble */
 .H_ui .H_ib_body {
     display: flex;
@@ -27,27 +19,45 @@
     justify-content: start;
     align-items: center;
 
-    padding-top: 2vh;
+    padding: 2vh;
 
-    width: 15vw;
-    height: 20vh;
-
-    font-size: 4vw;
+    width: calc(10vw + 2vh);
+    height: calc(14vh + 4vw);
 
     background-color: white;
     
     border-radius: 10px;
 }
 
+.H_ui .H_ib_content h2 {
+    font-weight: bold;
+
+    margin-bottom: 2vh;
+}
+
+.H_ui .H_ib_content h2,  .H_ui .H_ib_content h4{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+    font-size: clamp(1vw, 0.7vw + 0.6vw, 4vw);
+}
+
 .H_ui .H_ib_close {
     display: flex;
     justify-content: end;
 
-    width: 12vw;
+    width: 10vw;
 
-    margin-bottom: 3vh;
+    margin-bottom: 2vh;
 }
 
 .H_ui .H_ib_close svg {
-    width: 2vw;
+    width: 1.5vw;
+}
+
+/* If screen width is less than 750px, then it will update styling */
+@media only screen and (max-width: 750px) {
+    .map-area {
+        width: 100vw;
+        height: 90vh;
+    }
 }

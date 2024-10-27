@@ -84,9 +84,12 @@ export const Map = forwardRef(({ apiKey, userCoord, finishLoading, isMobile }, r
         
         //Loops over each restaurant property in the object and adds a marker on the map for that restaurant
         inDistanceRestaurants.forEach(element => {
+
+            console.log(element);
             
             const html = (
-                'Hi!'
+                `<h2>${element.title}</h2>` +
+                `<h4>${element.address.houseNumber} ${element.address.street}</h4>`
             );
 
             let restaurantMarker = new H.map.Marker({lat: element.position.lat, lng: element.position.lng});

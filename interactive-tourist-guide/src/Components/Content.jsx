@@ -110,7 +110,7 @@ export const AppContent = (props) => {
 
         }).catch((error) => {
             console.error(error);
-        })
+        });
     }
 
     const mapRef = useRef();

@@ -4,14 +4,18 @@
 .flex-dir-col {
     flex-direction: column;
 }
+
+/* Turns the flex direction to row */
 .flex-dir-row {
     flex-direction: row;
 }
+/* Aligns flex items to center vertically and horizontally */
 .flex-c-c {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+/* Aligns flex items to start horizontally and center vertically */
 .flex-s-c {
     display: flex;
     justify-content: start;

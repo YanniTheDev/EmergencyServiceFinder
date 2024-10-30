@@ -1,4 +1,6 @@
 /* FLEX REUSABLE STYLES */
+
+/* Turns the flex direction to column */
 .flex-dir-col {
     flex-direction: column;
 }
